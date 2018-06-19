@@ -3,6 +3,9 @@ class Product < ApplicationRecord
   audited only: :price
   include Unique
 
+  # associations
+  has_many :likes
+
   # validations
   validates :sku, :name, :price, presence: true
   validates :sku, uniqueness: true, if: :sku_changed?

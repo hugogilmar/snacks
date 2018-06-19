@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   resources :products, except: [ :show ] do
     member do
-      get 'like'
+      post 'like'
     end
   end
 

@@ -36,6 +36,16 @@ class ProductsController < ApplicationController
     render_no_content if product.destroy
   end
 
+  def like
+    if product_like.valid?
+      product_like.save()
+
+      render json: product
+    else
+      render_unprocessable_entity(product_like.errors)
+    end
+  end
+
   protected
 
   def search
@@ -62,5 +72,9 @@ class ProductsController < ApplicationController
 
   def product_params
     params[:product] ? params.require(:product).permit(:sku, :name, :price, :stock) : {}
+  end
+
+  def product_like
+    @product_like ||= product.likes.new(user_id: current_user.id)
   end
 end
