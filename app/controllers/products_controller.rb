@@ -43,6 +43,10 @@ class ProductsController < ApplicationController
   end
 
   def products
+    if search.sorts.empty?
+      search.sorts = 'name ASC'
+    end
+
     @products ||= search.result.page(params[:page])
   end
 
