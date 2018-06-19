@@ -1,24 +1,12 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Steps for local environment
 
-Things you may want to cover:
+Project runs on Rails 5.2 and Ruby 2.4.1
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- Place master.key on config/ dir.
+- Set database credentials, copy config/database.template.yml to config/database.yml.
+- If you like so, then import database from dump.sql
+- Run bundle install
+- Run rake db:migrate
+- Run rails s to start the server.
