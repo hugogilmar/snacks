@@ -39,7 +39,7 @@ class ProductsController < ApplicationController
   protected
 
   def search
-    @search ||= Product.ransack(params[:q])
+    @search ||= Product.only_available.ransack(params[:q])
   end
 
   def products
