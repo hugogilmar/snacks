@@ -11,16 +11,28 @@ module Common
     render_forbidden unless current_user.role_admin?
   end
 
+  def authorization_customer!
+    render_forbidden unless current_user.role_customer?
+  end
+
   def render_unauthorized
-    render json: { error: "Unauthorized" }, status: 401
+    render json: { error: "Unauthorized" }, status: 401 and return
   end
 
   def render_forbidden
-    render json: { error: "Forbidden" }, status: 403
+    render json: { error: "Forbidden" }, status: 403 and return
   end
 
   def render_not_found
-    render json: { error: "Not found" }, status: 404
+    render json: { error: "Not found" }, status: 404 and return
+  end
+
+  def render_unprocessable_entity(errors)
+    render json: { errors: errors }, status: 422 and return
+  end
+
+  def render_no_content
+    render nothing: true, status: 204 and return
   end
 
   def authenticate_user(email, password)

@@ -4,6 +4,9 @@ class User < ApplicationRecord
   include Unique
   include Token
 
+  # associations
+  has_many :orders
+
   # attributes
   enum role: [ :admin, :customer ], _prefix: true
 end
