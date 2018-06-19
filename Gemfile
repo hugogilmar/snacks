@@ -19,6 +19,7 @@ gem 'active_model_serializers', '~> 0.10.7'
 
 gem 'kaminari', '~> 1.1.1'
 gem 'ransack', '~> 1.8.8'
+gem 'audited', '~> 4.7.1'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

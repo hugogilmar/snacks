@@ -1,5 +1,6 @@
 class Product < ApplicationRecord
   # behaviours
+  audited only: :price
   include Unique
 
   # validations
