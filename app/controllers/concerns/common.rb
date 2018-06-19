@@ -11,6 +11,10 @@ module Common
     render_forbidden unless current_user.role_admin?
   end
 
+  def authorization_customer!
+    render_forbidden unless current_user.role_customer?
+  end
+
   def render_unauthorized
     render json: { error: "Unauthorized" }, status: 401 and return
   end

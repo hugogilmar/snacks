@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
   before_action :authenticate_request!
+  before_action :authorization_customer!
 
   def create
     order.assign_attributes(order_params)
