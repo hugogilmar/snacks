@@ -57,6 +57,6 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    params[:product] ? params.require(:product).permit(:sku, :name, :price) : {}
+    params[:product] ? params.require(:product).permit(:sku, :name, :price, :stock) : {}
   end
 end

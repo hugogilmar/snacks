@@ -1,3 +1,3 @@
 class ProductSerializer < ActiveModel::Serializer
-  attributes :uuid, :sku, :name, :price
+  attributes :uuid, :sku, :name, :price, :stock
 end
