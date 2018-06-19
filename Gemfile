@@ -17,6 +17,9 @@ gem 'uuid', '~> 2.3.8'
 
 gem 'active_model_serializers', '~> 0.10.7'
 
+gem 'kaminari', '~> 1.1.1'
+gem 'ransack', '~> 1.8.8'
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
