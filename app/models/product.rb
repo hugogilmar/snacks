@@ -1,5 +1,6 @@
 class Product < ApplicationRecord
   # behaviours
+  acts_as_paranoid
   audited only: :price
   include Unique
 
