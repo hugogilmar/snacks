@@ -56,27 +56,31 @@ module Common
   end
 
   def http_token
-    puts request.headers['Authorization']
     @http_token ||= if request.headers['Authorization'].present?
       request.headers['Authorization'].split(' ').last
     end
   end
 
   def jwt_token
-    @jwt_token ||= jwt_decode(http_token)
+    @jwt_token ||= HashWithIndifferentAccess.new(jwt_decode(http_token).first)
   end
 
   def jwt_encode(payload)
-    JWT.encode(payload, Rails.application.credentials.secret_key_base)
+    JWT.encode(payload, Rails.application.credentials.secret_key_base, 'HS256')
   end
 
   def jwt_decode(token)
-    return HashWithIndifferentAccess.new(JWT.decode(token, Rails.application.credentials.secret_key_base)[0])
-  rescue
-    nil
+    begin
+      return JWT.decode(token, Rails.application.credentials.secret_key_base, true, { algorithm: 'HS256' })
+    rescue
+      nil
+    end
   end
 
   def user_payload(user)
-    { user: UserSerializer.new(user), token: jwt_encode({ authentication_token: user.authentication_token }) }
+    expires_at = Time.now.to_i + 60 * 60
+    issued_at = Time.now.to_i
+
+    { token: jwt_encode({ exp: expires_at, iat: issued_at, authentication_token: user.authentication_token }) }
   end
 end
